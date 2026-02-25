@@ -1,5 +1,7 @@
 # Linear Algebra Review
 
+Reference: Mermin Appendix A; supplemented by 2601 Ch. 3.
+
 This is the working linear-algebra kit for quantum computing. The focus is on objects that appear repeatedly: inner products, adjoints, unitary and Hermitian matrices, eigenvalues, tensor products, and density matrices.
 
 ---
@@ -28,13 +30,13 @@ The numbers $\alpha_x$ are the **components** of $\vert \alpha \rangle$ in the s
 
 The **standard inner product** on $\mathbb{C}^D$ is defined by
 
-$$\langle \phi \vert \psi \rangle := \sum_{j=0}^{N} \phi_j^{*} \psi_j.$$
+$$\langle \phi \vert \psi \rangle := \sum_{j=0}^{N} \bar{\phi}_j \psi_j.$$
 
 Convention: **conjugate-linear in the first slot**, linear in the second (physics convention).
 
 The **bra** $\langle \alpha \vert$ is the conjugate transpose (adjoint) of the ket:
 
-$$\langle \alpha \vert = \vert \alpha \rangle^{\dagger} = (\alpha_0^{*}, \alpha_1^{*}, \dots, \alpha_N^{*}).$$
+$$\langle \alpha \vert = \vert \alpha \rangle^{\dagger} = (\bar{\alpha}_0, \ \bar{\alpha}_1, \ \dots, \ \bar{\alpha}_N).$$
 
 So $\langle \alpha \vert \beta \rangle = \alpha^{\dagger} \beta \in \mathbb{C}$.
 
