@@ -1,213 +1,120 @@
 # Linear Algebra Review
 
-Reference: Mermin Appendix A; supplemented by 2601 Ch. 3.
-
 This is the working linear-algebra kit for quantum computing. The focus is on objects that appear repeatedly: inner products, adjoints, unitary and Hermitian matrices, eigenvalues, tensor products, and density matrices.
 
 ---
 
 ## 1. Complex Vector Spaces
 
-A **complex vector space** \(V\) has dimension \(D\). We index the standard basis by \(0,1,\dots,D-1\).
+A **complex vector space** $V$ has dimension $D = N + 1$ (we index from $0$ to $N$).
 
-**Standard (computational) basis** of \(V\):
+**Standard (computational) basis** of $V$:
 
-$$
-|0\rangle =
-\begin{bmatrix}
-1\\
-0\\
-\vdots\\
-0
-\end{bmatrix},
-\quad
-|1\rangle =
-\begin{bmatrix}
-0\\
-1\\
-\vdots\\
-0
-\end{bmatrix},
-\quad \dots \quad
-|D-1\rangle =
-\begin{bmatrix}
-0\\
-\vdots\\
-0\\
-1
-\end{bmatrix}.
-$$
+$$\vert 0\rangle = \begin{pmatrix} 1 \\\\ 0 \\\\ \vdots \\\\ 0 \end{pmatrix}, \quad \vert 1\rangle = \begin{pmatrix} 0 \\\\ 1 \\\\ \vdots \\\\ 0 \end{pmatrix}, \quad \dots \quad \vert N\rangle = \begin{pmatrix} 0 \\\\ \vdots \\\\ 0 \\\\ 1 \end{pmatrix}$$
 
-These are \(D\)-dimensional column vectors.
+These are $D$-dimensional column vectors.
 
-**Dirac notation.** Vectors are called **kets**, written \(|\alpha\rangle\). Any \(|\alpha\rangle\in V\) can be expanded as
+**Dirac notation.** Vectors are called **kets**, written $\vert \alpha \rangle$. Any $\vert \alpha \rangle \in V$ can be expanded as
 
-$$
-|\alpha\rangle = \sum_{x=0}^{D-1} \alpha_x |x\rangle,
-\qquad \alpha_x \in \mathbb{C}.
-$$
+$$\vert \alpha \rangle = \sum_{x=0}^{N} \alpha_x \vert x \rangle = \begin{pmatrix} \alpha_0 \\\\ \alpha_1 \\\\ \vdots \\\\ \alpha_N \end{pmatrix}, \quad \alpha_x \in \mathbb{C}.$$
 
-In coordinates:
+The numbers $\alpha_x$ are the **components** of $\vert \alpha \rangle$ in the standard basis.
 
-$$
-|\alpha\rangle =
-\begin{bmatrix}
-\alpha_0\\
-\alpha_1\\
-\vdots\\
-\alpha_{D-1}
-\end{bmatrix}.
-$$
-
-The numbers \(\alpha_x\) are the **components** of \(|\alpha\rangle\) in the standard basis.
-
-**Linearity.** If \(|\alpha\rangle,|\beta\rangle\in V\) and \(a,b\in\mathbb{C}\), then \(a|\alpha\rangle + b|\beta\rangle \in V\).
+**Linearity.** If $\vert \alpha \rangle, \vert \beta \rangle \in V$ and $a, b \in \mathbb{C}$, then $a\vert \alpha \rangle + b\vert \beta \rangle \in V$.
 
 ---
 
 ## 2. Inner Product
 
-The **standard inner product** on \(\mathbb{C}^D\) is defined by
+The **standard inner product** on $\mathbb{C}^D$ is defined by
 
-$$
-\langle \phi | \psi \rangle := \sum_{j=0}^{D-1} \phi_j^* \psi_j.
-$$
+$$\langle \phi \vert \psi \rangle := \sum_{j=0}^{N} \phi_j^{*} \psi_j.$$
 
 Convention: **conjugate-linear in the first slot**, linear in the second (physics convention).
 
-The **bra** \(\langle \alpha|\) is the conjugate transpose (adjoint) of the ket:
+The **bra** $\langle \alpha \vert$ is the conjugate transpose (adjoint) of the ket:
 
-$$
-\langle \alpha| = |\alpha\rangle^\dagger = (\alpha_0^*, \alpha_1^*, \dots, \alpha_{D-1}^*).
-$$
+$$\langle \alpha \vert = \vert \alpha \rangle^{\dagger} = (\alpha_0^{*}, \alpha_1^{*}, \dots, \alpha_N^{*}).$$
 
-So \(\langle \alpha | \beta \rangle = \alpha^\dagger \beta \in \mathbb{C}\).
+So $\langle \alpha \vert \beta \rangle = \alpha^{\dagger} \beta \in \mathbb{C}$.
 
 **Norm.**
 
-$$
-\|\psi\|^2 = \langle \psi|\psi\rangle = \sum_{j=0}^{D-1} |\psi_j|^2.
-$$
+$$\Vert \psi \Vert^{2} = \langle \psi \vert \psi \rangle = \sum_j \vert \psi_j \vert^{2}.$$
 
 **Orthonormality of the standard basis:**
 
-$$
-\langle x|y\rangle = \delta_{xy}.
-$$
+$$\langle x \vert y \rangle = \delta_{xy}.$$
 
 **Cauchy–Schwarz inequality:**
 
-$$
-|\langle \phi|\psi\rangle| \le \|\phi\|\,\|\psi\|.
-$$
+$$\vert \langle \phi \vert \psi \rangle \vert \leq \Vert \phi \Vert \cdot \Vert \psi \Vert.$$
 
-Operational meaning: amplitudes are inner products, probabilities are squared magnitudes. With normalization, Cauchy–Schwarz ensures probabilities stay bounded.
+Operational meaning: amplitudes are inner products, probabilities are squared magnitudes. Cauchy–Schwarz is why probabilities are bounded by 1.
 
 ---
 
 ## 3. Outer Products and Projectors
 
-The **outer product** \(|\psi\rangle\langle \phi|\) is a \(D\times D\) matrix:
+The **outer product** $\vert \psi \rangle \langle \phi \vert$ is a $D \times D$ matrix:
 
-$$
-(|\psi\rangle\langle \phi|)\,|v\rangle = |\psi\rangle \langle \phi|v\rangle.
-$$
+$$(\vert \psi \rangle \langle \phi \vert) \vert v \rangle = \vert \psi \rangle \langle \phi \vert v \rangle.$$
 
-It maps any vector to a scalar multiple of \(|\psi\rangle\).
+It maps any vector to a scalar multiple of $\vert \psi \rangle$.
 
-**Rank-one projector.** If \(\|\psi\|=1\), define
+**Rank-one projector.** If $\Vert \psi \Vert = 1$, define
 
-$$
-\Pi_\psi := |\psi\rangle\langle \psi|.
-$$
+$$\Pi_\psi := \vert \psi \rangle \langle \psi \vert.$$
 
-Then \(\Pi_\psi^\dagger = \Pi_\psi\) (Hermitian) and \(\Pi_\psi^2 = \Pi_\psi\) (idempotent):
+Then $\Pi_\psi^{\dagger} = \Pi_\psi$ (Hermitian) and $\Pi_\psi^{2} = \Pi_\psi$ (idempotent):
 
-$$
-\Pi_\psi^2
-= |\psi\rangle\underbrace{\langle \psi|\psi\rangle}_{=1}\langle \psi|
-= \Pi_\psi.
-$$
+$$\Pi_\psi^{2} = \vert \psi \rangle \langle \psi \vert \psi \rangle \langle \psi \vert = \vert \psi \rangle \cdot 1 \cdot \langle \psi \vert = \Pi_\psi.$$
 
-**Completeness relation.** For any orthonormal basis \(\{|k\rangle\}\):
+(Here $\langle \psi \vert \psi \rangle = 1$ by normalization.)
 
-$$
-\sum_k |k\rangle\langle k| = I.
-$$
+**Completeness relation.** For any orthonormal basis $\\{\vert k \rangle\\}$:
+
+$$\sum_k \vert k \rangle \langle k \vert = I.$$
 
 ---
 
 ## 4. Linear Maps: Adjoint, Unitary, Hermitian
 
-**Adjoint.** For \(A\in\mathbb{C}^{D\times D}\), the adjoint is \(A^\dagger = (\overline{A})^T\) (conjugate transpose).
+**Adjoint.** For $A \in \mathbb{C}^{D \times D}$, the adjoint is $A^{\dagger} = (\bar{A})^{T}$ (conjugate transpose).
 
-**Unitary.** \(U\) is unitary if \(U^\dagger U = I\) (equivalently \(UU^\dagger = I\)).
+**Unitary.** $U$ is unitary if $U^{\dagger} U = I$ (equivalently $UU^{\dagger} = I$).
 
-**Hermitian.** \(H\) is Hermitian if \(H^\dagger = H\).
+**Hermitian.** $H$ is Hermitian if $H^{\dagger} = H$.
 
 **Key property of unitaries:** they preserve norms and inner products.
 
-$$
-\|U\psi\| = \|\psi\|,
-\qquad
-\langle U\phi|U\psi\rangle = \langle \phi|\psi\rangle.
-$$
+$$\Vert U\psi \Vert = \Vert \psi \Vert, \qquad \langle U\phi \vert U\psi \rangle = \langle \phi \vert \psi \rangle.$$
 
-*Proof.* \(\|U\psi\|^2 = \psi^\dagger U^\dagger U \psi = \psi^\dagger \psi = \|\psi\|^2\). Similarly for the inner product.
+*Proof.*
+
+$$\Vert U\psi \Vert^{2} = \psi^{\dagger} U^{\dagger} U \psi = \psi^{\dagger} \psi = \Vert \psi \Vert^{2}.$$
+
+Similarly for the inner product.
 
 This is why quantum gates (unitary operators) preserve probability normalization.
 
 ### Concrete gate checks
 
-**Pauli \(X\):**
+**Pauli X:**
 
-$$
-X =
-\begin{bmatrix}
-0 & 1\\
-1 & 0
-\end{bmatrix},
-\quad
-X^\dagger = X,
-\quad
-X^2 = I.
-$$
+$$X = \begin{pmatrix} 0 & 1 \\\\ 1 & 0 \end{pmatrix}, \quad X^{\dagger} = X, \quad X^{2} = I.$$
 
-Hence unitary (\(X^\dagger X = I\)) and Hermitian (\(X^\dagger = X\)).
+Hence unitary ( $X^{\dagger} X = I$ ) and Hermitian ( $X^{\dagger} = X$ ).
 
 **Hadamard:**
 
-$$
-H = \frac{1}{\sqrt{2}}
-\begin{bmatrix}
-1 & 1\\
-1 & -1
-\end{bmatrix}.
-$$
+$$H = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 & 1 \\\\ 1 & -1 \end{pmatrix}.$$
 
 Check:
 
-$$
-H^\dagger H
-= \frac{1}{2}
-\begin{bmatrix}
-1 & 1\\
-1 & -1
-\end{bmatrix}
-\begin{bmatrix}
-1 & 1\\
-1 & -1
-\end{bmatrix}
-=
-\frac{1}{2}
-\begin{bmatrix}
-2 & 0\\
-0 & 2
-\end{bmatrix}
-= I.
-$$
+$$H^{\dagger} H = \frac{1}{2}\begin{pmatrix}1 & 1 \\\\ 1 & -1\end{pmatrix}\begin{pmatrix}1 & 1 \\\\ 1 & -1\end{pmatrix} = \frac{1}{2}\begin{pmatrix}2 & 0 \\\\ 0 & 2\end{pmatrix} = I.$$
 
-So \(H\) is unitary and Hermitian.
+Unitary and Hermitian.
 
 ---
 
@@ -217,64 +124,42 @@ So \(H\) is unitary and Hermitian.
 
 Eigenvalues show up whenever you have:
 - **Measurement**: observables are Hermitian; outcomes are eigenvalues.
-- **Time evolution**: \(e^{-itH}\) — spectral decomposition turns matrix exponentials into scalars.
+- **Time evolution**: $e^{-itH}$ — spectral decomposition turns matrix exponentials into scalars.
 - **Phase estimation / QPE**: eigenphases are what you measure.
 
-### Spectral theorem (finite-dimensional)
+### Spectral theorem
 
-Every Hermitian matrix \(A\) admits a **spectral decomposition**:
+Every Hermitian matrix $A$ admits a **spectral decomposition**:
 
-$$
-A = \sum_k \lambda_k |v_k\rangle\langle v_k|,
-$$
+$$A = \sum_k \lambda_k \vert v_k \rangle \langle v_k \vert$$
 
-where \(\{|v_k\rangle\}\) is an orthonormal eigenbasis and \(\lambda_k\in\mathbb{R}\).
+where $\\{\vert v_k \rangle\\}$ is an orthonormal eigenbasis and $\lambda_k \in \mathbb{R}$.
 
-For unitary matrices, the eigenvalues lie on the unit circle: \(\lambda_k = e^{i\theta_k}\).
+For unitary matrices, the eigenvalues lie on the unit circle: $\lambda_k = e^{i\theta_k}$.
 
-### Worked example: diagonalize \(Z\)
+### Worked example: diagonalize Z
 
-$$
-Z =
-\begin{bmatrix}
-1 & 0\\
-0 & -1
-\end{bmatrix}.
-$$
+$$Z = \begin{pmatrix} 1 & 0 \\\\ 0 & -1 \end{pmatrix}.$$
 
-Eigenpairs: \((+1, |0\rangle)\) and \((-1, |1\rangle)\). Spectral decomposition:
+Eigenpairs: $(+1, \vert 0 \rangle)$ and $(-1, \vert 1 \rangle)$. Spectral decomposition:
 
-$$
-Z = (+1)|0\rangle\langle 0| + (-1)|1\rangle\langle 1|.
-$$
+$$Z = (+1)\vert 0 \rangle \langle 0 \vert + (-1)\vert 1 \rangle \langle 1 \vert.$$
 
-### Worked example: diagonalize a general \(2\times 2\) Hermitian matrix
+### Worked example: diagonalize a general 2×2 Hermitian matrix
 
-Let
+$$A = \begin{pmatrix} 2 & 1+i \\\\ 1-i & 0 \end{pmatrix}.$$
 
-$$
-A =
-\begin{bmatrix}
-2 & 1+i\\
-1-i & 0
-\end{bmatrix}.
-$$
+**Step 1 — eigenvalues.** Solve $\det(A - \lambda I) = 0$:
 
-**Step 1 — eigenvalues.** Solve \(\det(A-\lambda I)=0\):
+$$(2-\lambda)(-\lambda) - (1+i)(1-i) = \lambda^{2} - 2\lambda - 2 = 0$$
 
-$$
-(2-\lambda)(-\lambda) - (1+i)(1-i) = \lambda^2 - 2\lambda - 2 = 0,
-$$
+so $\lambda = 1 \pm \sqrt{3}$.
 
-so \(\lambda = 1 \pm \sqrt{3}\).
-
-**Step 2 — eigenvectors.** For \(\lambda_+ = 1+\sqrt{3}\), solve \((A-\lambda_+ I)v=0\) to find an eigenvector, then normalize. Repeat for \(\lambda_-\).
+**Step 2 — eigenvectors.** For $\lambda_+ = 1 + \sqrt{3}$, solve $(A - \lambda_+ I)v = 0$ to find the eigenvector, then normalize. Repeat for $\lambda_-$.
 
 **Step 3 — spectral decomposition.**
 
-$$
-A = \lambda_+ |v_+\rangle\langle v_+| + \lambda_- |v_-\rangle\langle v_-|.
-$$
+$$A = \lambda_+ \vert v_+ \rangle \langle v_+ \vert + \lambda_- \vert v_- \rangle \langle v_- \vert.$$
 
 ---
 
@@ -282,56 +167,35 @@ $$
 
 ### Definition
 
-Given two vector spaces \(V_1\) (\(\dim D_1\)) and \(V_2\) (\(\dim D_2\)), the tensor product \(V_1\otimes V_2\) has dimension \(D_1D_2\).
+Given two vector spaces $V_1$ (dim $D_1$) and $V_2$ (dim $D_2$), the tensor product $V_1 \otimes V_2$ has dimension $D_1 D_2$.
 
-For \(|\alpha\rangle\in V_1\) and \(|\beta\rangle\in V_2\), the tensor product \(|\alpha\rangle\otimes|\beta\rangle\) is a \(D_1D_2\)-dimensional column vector.
+For $\vert \alpha \rangle \in V_1$ and $\vert \beta \rangle \in V_2$:
+
+$$\vert \alpha \rangle \otimes \vert \beta \rangle = \begin{pmatrix} \alpha_0 \beta_0 \\\\ \vdots \\\\ \alpha_0 \beta_{N_2} \\\\ \alpha_1 \beta_0 \\\\ \vdots \\\\ \alpha_{N_1} \beta_{N_2} \end{pmatrix}$$
+
+a $D_1 D_2$-dimensional column vector.
 
 ### Kronecker product (for matrices)
 
-If \(A\in\mathbb{C}^{m\times m}\) and \(B\in\mathbb{C}^{n\times n}\):
+If $A \in \mathbb{C}^{m \times m}$ and $B \in \mathbb{C}^{n \times n}$:
 
-$$
-A\otimes B =
-\begin{bmatrix}
-a_{11}B & \cdots & a_{1m}B\\
-\vdots & \ddots & \vdots\\
-a_{m1}B & \cdots & a_{mm}B
-\end{bmatrix}
-\in \mathbb{C}^{mn\times mn}.
-$$
+$$A \otimes B = \begin{pmatrix} a_{11}B & \cdots & a_{1m}B \\\\ \vdots & \ddots & \vdots \\\\ a_{m1}B & \cdots & a_{mm}B \end{pmatrix} \in \mathbb{C}^{mn \times mn}.$$
 
 ### The wiring rule
 
-$$
-(A\otimes B)(|a\rangle\otimes|b\rangle) = (A|a\rangle)\otimes(B|b\rangle).
-$$
+$$(A \otimes B)(\vert a \rangle \otimes \vert b \rangle) = (A\vert a \rangle) \otimes (B\vert b \rangle).$$
 
-This is the algebraic statement of “parallel operations on separate wires.”
+This is the algebraic statement of "parallel operations on separate wires."
 
-### Example: \(H\otimes H\)
+### Example: H ⊗ H
 
-$$
-H\otimes H
-=
-\frac{1}{2}
-\begin{bmatrix}
-1 & 1 & 1 & 1\\
-1 & -1 & 1 & -1\\
-1 & 1 & -1 & -1\\
-1 & -1 & -1 & 1
-\end{bmatrix}.
-$$
+$$H \otimes H = \frac{1}{2} \begin{pmatrix} 1 & 1 & 1 & 1 \\\\ 1 & -1 & 1 & -1 \\\\ 1 & 1 & -1 & -1 \\\\ 1 & -1 & -1 & 1 \end{pmatrix}.$$
 
-### Example: \((X\otimes Z)(|0\rangle\otimes|1\rangle)\)
+### Example: (X ⊗ Z)(|0⟩ ⊗ |1⟩)
 
 By the wiring rule:
 
-$$
-(X\otimes Z)(|0\rangle\otimes|1\rangle)
-= (X|0\rangle)\otimes(Z|1\rangle)
-= |1\rangle\otimes(-|1\rangle)
-= -|11\rangle.
-$$
+$$(X \otimes Z)(\vert 0 \rangle \otimes \vert 1 \rangle) = (X\vert 0 \rangle) \otimes (Z\vert 1 \rangle) = \vert 1 \rangle \otimes (-\vert 1 \rangle) = -\vert 11 \rangle.$$
 
 ---
 
@@ -339,99 +203,63 @@ $$
 
 ### Why density matrices?
 
-A ket \(|\psi\rangle\) describes a **pure state**. Density matrices extend the formalism to handle:
+A ket $\vert \psi \rangle$ describes a **pure state** — a system we have complete knowledge of. But in practice, quantum systems are almost never purely described by a single ket. Density matrices extend the formalism to handle two situations that kets alone cannot express:
 
-**Classical ignorance.** A fair coin prepares \(|0\rangle\) or \(|1\rangle\) with probability \(1/2\):
+**Classical ignorance.** Someone flips a coin: heads → prepare $\vert 0 \rangle$, tails → prepare $\vert 1 \rangle$, but doesn't tell you the result. The qubit is not in a superposition — it's in a **classical probabilistic mixture**:
 
-$$
-\rho_{\text{mix}}
-= \tfrac{1}{2}|0\rangle\langle 0|
-+ \tfrac{1}{2}|1\rangle\langle 1|
-= \tfrac{1}{2}I.
-$$
+$$\rho_{\mathrm{mix}} = \frac{1}{2}\vert 0 \rangle \langle 0 \vert + \frac{1}{2}\vert 1 \rangle \langle 1 \vert = \frac{1}{2}I.$$
 
-This differs from the superposition \(|+\rangle=\tfrac{1}{\sqrt{2}}(|0\rangle+|1\rangle)\). Both give 50/50 in the computational basis, but \(|+\rangle\) is deterministic in the \(X\) basis while \(\rho_{\text{mix}}\) remains 50/50 in every basis. The difference is **coherence** (off-diagonal terms).
+This is fundamentally different from the superposition $\vert + \rangle = \frac{1}{\sqrt{2}}(\vert 0 \rangle + \vert 1 \rangle)$. Both give 50/50 in the computational basis, but $\vert + \rangle$ yields a deterministic $+1$ outcome when measured in the X basis, while $\rho_{\mathrm{mix}}$ gives 50/50 in every basis. The difference is **coherence** — the off-diagonal terms that $\rho_{\mathrm{mix}}$ lacks.
 
-**Entanglement.** For the Bell state \(|\Phi^+\rangle=\tfrac{1}{\sqrt{2}}(|00\rangle+|11\rangle)\), the joint state is pure, but the reduced state of either qubit is maximally mixed: \(\rho_A=\tfrac{1}{2}I\). A subsystem of a pure entangled state cannot be described by a ket.
+**Entanglement.** This is the deeper reason. Consider the Bell state $\vert \Phi^{+} \rangle = \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 11 \rangle)$. The full two-qubit system is pure, but if you look at the first qubit alone (partial trace over B), you get $\rho_A = \frac{1}{2}I$ — a maximally mixed state. This is not ignorance about preparation; it is a fundamental consequence of entanglement: **a subsystem of a pure entangled state cannot be described by any ket**. Only a density matrix works.
+
+In short: ket notation can only represent pure states, but real quantum systems involve noise, decoherence, and partial observation, all of which produce mixed states. The density matrix is the general-purpose description.
 
 ### Definition
 
-A **density matrix** is \(\rho\in\mathbb{C}^{D\times D}\) satisfying:
+A **density matrix** is $\rho \in \mathbb{C}^{D \times D}$ satisfying:
 
-$$
-\rho^\dagger = \rho,
-\qquad
-\rho \succeq 0,
-\qquad
-\operatorname{Tr}(\rho)=1.
-$$
+$$\rho^{\dagger} = \rho, \qquad \rho \succeq 0, \qquad \mathrm{Tr}(\rho) = 1.$$
 
-A state is **pure** if \(\rho = |\psi\rangle\langle\psi|\) (rank one), equivalently \(\operatorname{Tr}(\rho^2)=1\).
+A state is **pure** if $\rho = \vert \psi \rangle \langle \psi \vert$ (rank one), equivalently $\mathrm{Tr}(\rho^{2}) = 1$.
 
-A state is **mixed** if \(\operatorname{Tr}(\rho^2)<1\).
+A state is **mixed** if $\mathrm{Tr}(\rho^{2}) < 1$.
 
 ### Example: mixture vs. superposition
 
-$$
-\rho_{\text{mix}} = \tfrac{1}{2}I,
-\qquad
-\rho_+ = |+\rangle\langle +|
-= \tfrac{1}{2}
-\begin{bmatrix}
-1 & 1\\
-1 & 1
-\end{bmatrix}.
-$$
+$$\rho_{\mathrm{mix}} = \frac{1}{2}\vert 0 \rangle \langle 0 \vert + \frac{1}{2}\vert 1 \rangle \langle 1 \vert = \frac{1}{2}I$$
 
-Purity check:
+$$\rho_{+} = \vert + \rangle \langle + \vert = \frac{1}{2}\begin{pmatrix}1 & 1 \\\\ 1 & 1\end{pmatrix}$$
 
-$$
-\operatorname{Tr}(\rho_{\text{mix}}^2) = \tfrac{1}{2},
-\qquad
-\operatorname{Tr}(\rho_+^2) = 1.
-$$
+Both give $p(0) = p(1) = 1/2$ in the computational basis, but they differ by off-diagonal terms (coherence):
 
-In general, \(\operatorname{Tr}(\rho^2)\) detects coherence: the maximally mixed state \(\rho=\tfrac{1}{D}I\) gives \(\operatorname{Tr}(\rho^2)=\tfrac{1}{D}\), while a pure state gives \(1\).
+$$\mathrm{Tr}(\rho_{\mathrm{mix}}^{2}) = \frac{1}{2} \quad (\mathrm{mixed}), \qquad \mathrm{Tr}(\rho_{+}^{2}) = 1 \quad (\mathrm{pure}).$$
+
+$\mathrm{Tr}(\rho^{2})$ quantifies purity: it detects whether off-diagonal coherence is present. A fully mixed state ( $\rho = \frac{1}{D}I$ ) gives the minimum $\mathrm{Tr}(\rho^{2}) = 1/D$; a pure state gives the maximum $\mathrm{Tr}(\rho^{2}) = 1$.
 
 ### Expectation values
 
-For observable \(O\) and state \(\rho\):
+For observable $O$ and state $\rho$:
 
-$$
-\langle O\rangle = \operatorname{Tr}(\rho O).
-$$
+$$\langle O \rangle = \mathrm{Tr}(\rho O).$$
 
 ### Partial trace (basic)
 
-For a bipartite state \(\rho_{AB}\), the reduced state on \(A\) is \(\rho_A=\operatorname{Tr}_B(\rho_{AB})\).
+For a bipartite state $\rho_{AB}$, the reduced state on $A$ is $\rho_A = \mathrm{Tr}_B(\rho_{AB})$.
 
-**Example:** \(|\Phi^+\rangle=\tfrac{1}{\sqrt{2}}(|00\rangle+|11\rangle)\).
+**Example:** $\vert \Phi^{+} \rangle = \frac{1}{\sqrt{2}}(\vert 00 \rangle + \vert 11 \rangle)$.
 
-$$
-\rho_{AB}
-=
-\frac{1}{2}
-\begin{bmatrix}
-1 & 0 & 0 & 1\\
-0 & 0 & 0 & 0\\
-0 & 0 & 0 & 0\\
-1 & 0 & 0 & 1
-\end{bmatrix},
-\qquad
-\rho_A = \operatorname{Tr}_B(\rho_{AB}) = \tfrac{1}{2}I.
-$$
+$$\rho_{AB} = \frac{1}{2}\begin{pmatrix}1 & 0 & 0 & 1 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\\\ 1 & 0 & 0 & 1\end{pmatrix}, \qquad \rho_A = \mathrm{Tr}_B(\rho_{AB}) = \frac{1}{2}I.$$
+
+The marginal of a maximally entangled state is maximally mixed.
 
 ---
 
 ## 8. Born Rule in Coordinates
 
-Let \(|\psi\rangle = \alpha |0\rangle + \beta |1\rangle\) with \(|\alpha|^2 + |\beta|^2 = 1\). Measurement in the computational basis:
+Let $\vert \psi \rangle = \alpha \vert 0 \rangle + \beta \vert 1 \rangle$ with $\vert \alpha \vert^{2} + \vert \beta \vert^{2} = 1$. Measurement in the computational basis:
 
-$$
-p(0) = |\langle 0|\psi\rangle|^2 = |\alpha|^2,
-\qquad
-p(1) = |\langle 1|\psi\rangle|^2 = |\beta|^2.
-$$
+$$p(0) = \vert \langle 0 \vert \psi \rangle \vert^{2} = \vert \alpha \vert^{2}, \qquad p(1) = \vert \langle 1 \vert \psi \rangle \vert^{2} = \vert \beta \vert^{2}.$$
 
 This is inner products and squaring — nothing more.
 
@@ -439,21 +267,23 @@ This is inner products and squaring — nothing more.
 
 ## Quick Reference
 
-- State vector: \(|\psi\rangle\in\mathbb{C}^D\) (column vector)
-- Dual vector: \(\langle \psi| = |\psi\rangle^\dagger\) (row vector)
-- Inner product: \(\langle \phi|\psi\rangle\) (amplitude; \(|\cdot|^2\) gives probability)
-- Norm: \(\|\psi\|^2=\langle\psi|\psi\rangle\) (equals 1 for valid pure states)
-- Outer product: \(|\psi\rangle\langle\phi|\) (\(D\times D\) matrix)
-- Projector: \(\Pi=|\psi\rangle\langle\psi|\) (\(\Pi^2=\Pi\), \(\Pi^\dagger=\Pi\))
-- Unitary: \(U^\dagger U = I\) (norm-preserving; gates)
-- Hermitian: \(H^\dagger=H\) (real eigenvalues; observables)
-- Density matrix: \(\rho\succeq 0\), \(\operatorname{Tr}(\rho)=1\) (mixed states)
-- Tensor product: \(A\otimes B\) (multi-qubit systems)
-- Expectation: \(\operatorname{Tr}(\rho O)\) (observable average)
+| Object | Notation | Key property |
+|--------|----------|-------------|
+| State vector | $\vert \psi \rangle \in \mathbb{C}^D$ | Column vector |
+| Dual vector | $\langle \psi \vert$ | Row vector (conjugate transpose) |
+| Inner product | $\langle \phi \vert \psi \rangle$ | Amplitude |
+| Norm | $\Vert \psi \Vert^{2} = \langle \psi \vert \psi \rangle$ | Must equal 1 for valid states |
+| Outer product | $\vert \psi \rangle \langle \phi \vert$ | $D \times D$ matrix |
+| Projector | $\Pi = \vert \psi \rangle \langle \psi \vert$ | Idempotent, Hermitian |
+| Unitary | $U^{\dagger} U = I$ | Norm-preserving; gates |
+| Hermitian | $H^{\dagger} = H$ | Real eigenvalues; observables |
+| Density matrix | $\rho \succeq 0$, $\mathrm{Tr}(\rho)=1$ | Mixed states |
+| Tensor product | $A \otimes B$ | Multi-qubit systems |
+| Expectation | $\mathrm{Tr}(\rho O)$ | Observable average |
 
 ---
 
 ## References
 
 - Mermin, N. D. *Quantum Computer Science*, Appendix A.
-- Cho, G. *Geometry- and Topology-Informed QC*, Chapter 3 (“Crash Course: Linear Algebra You Actually Need”).
+- Cho, G. *Geometry- and Topology-Informed QC*, Chapter 3 ("Crash Course: Linear Algebra You Actually Need").
