@@ -4,17 +4,17 @@ A structured, ground-up study of quantum computing — from linear algebra throu
 
 ---
 
-## Planned Topics
+## Topics
 
-- Linear algebra review
-- Quantum mechanics basics
-- Quantum computing basics — qubits, gates, circuits
-- Quantum protocols — QKD, dense coding, teleportation
-- Quantum algorithms — Deutsch, Bernstein–Vazirani, Grover, Simon, QFT / QPE / Shor
-- Quantum error correction
-- VQE
-- QAOA
-- Quantum Monte Carlo
+- [Linear algebra review](00-linear-algebra/notes.md)
+- Quantum mechanics basics (TBD)
+- Quantum computing basics — qubits, gates, circuits (TBD)
+- Quantum protocols — QKD, dense coding, teleportation (TBD)
+- Quantum algorithms — Deutsch, Bernstein–Vazirani, Grover, Simon, QFT / QPE / Shor (TBD)
+- Quantum error correction (TBD)
+- VQE (TBD)
+- QAOA (TBD)
+- Quantum Monte Carlo (TBD)
 
 ---
 
