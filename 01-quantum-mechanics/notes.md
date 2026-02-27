@@ -281,7 +281,7 @@ If system $A$ has state space $\mathcal{H}_A$ and system $B$ has state space $\m
 
 $$\mathcal{H}_{AB} = \mathcal{H}_A \otimes \mathcal{H}_B.$$
 
-For two qubits: $\mathcal{H}_A \cong \mathbb{C}^2$, $\mathcal{H}_B \cong \mathbb{C}^2$, so $\mathcal{H}_{AB} \cong \mathbb{C}^4$.
+For two qubits: $$\mathcal{H}_A \cong \mathbb{C}^2$, $\mathcal{H}_B \cong \mathbb{C}^2$, so $\mathcal{H}_{AB} \cong \mathbb{C}^4.$$
 
 A **product state** is $\vert \psi \rangle_A \otimes \vert \phi \rangle_B$. A state that cannot be written this way is **entangled**.
 
@@ -339,16 +339,6 @@ extended by linearity. The **reduced density operator** for system $A$ is $\rho_
 
 **Physical justification (N&C Box 2.6).** For any observable $M$ on system $A$, measurement averages are the same whether computed from $\rho_A$ or $\rho_{AB}$: $\mathrm{Tr}(M\rho_A) = \mathrm{Tr}((M \otimes I_B)\rho_{AB})$. The partial trace is the *unique* operation with this property.
 
-### Purification (N&C 2.5)
-
-Any mixed state $\rho_A$ can be "lifted" to a pure state of a larger system. Given $\rho_A = \sum_i p_i \vert i^A\rangle\langle i^A\vert$, introduce a **reference system** $R$ with orthonormal basis $\vert i^R\rangle$ and define
-
-$$\vert AR\rangle = \sum_i \sqrt{p_i}\,\vert i^A\rangle\vert i^R\rangle.$$
-
-Then $\mathrm{Tr}_R(\vert AR\rangle\langle AR\vert) = \rho_A$. The construction is essentially the Schmidt decomposition run in reverse.
-
-**Use case.** Purification converts questions about mixed states into questions about pure states, which are often easier to analyze. It is used extensively in the theory of quantum channels and in security proofs for QKD.
-
 ---
 
 ## 10. The Postulates — Summary
@@ -383,7 +373,6 @@ Everything else — Bloch sphere geometry, interference, entanglement, Born rule
 | $ad - bc \neq 0$ | Determinant test | Entanglement (2 qubits) |
 | $\vert\Psi\rangle = \sum_k \lambda_k \vert u_k\rangle\vert v_k\rangle$ | Schmidt decomposition | $r$ terms instead of $d_A d_B$; $r=1$ iff product |
 | $\rho_A = \mathrm{Tr}_B(\rho_{AB})$ | Partial trace | Reduced density operator (N&C) |
-| $\vert AR\rangle = \sum_i \sqrt{p_i}\vert i^A\rangle\vert i^R\rangle$ | Purification | Lift mixed to pure (N&C) |
 
 ---
 
