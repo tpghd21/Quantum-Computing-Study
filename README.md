@@ -7,7 +7,7 @@ A structured, ground-up study of quantum computing — from linear algebra throu
 ## Topics
 
 - [Linear algebra review](00-linear-algebra/notes.md)
-- Quantum mechanics basics (TBD)
+- [Quantum mechanics basics](01-quantum-mechanics/notes.md)
 - Quantum computing basics — qubits, gates, circuits (TBD)
 - Quantum protocols — QKD, dense coding, teleportation (TBD)
 - Quantum algorithms — Deutsch, Bernstein–Vazirani, Grover, Simon, QFT / QPE / Shor (TBD)
