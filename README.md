@@ -9,7 +9,7 @@ A structured, ground-up study of quantum computing — from linear algebra throu
 - [Linear algebra review](00-linear-algebra/notes.md)
 - [Quantum mechanics basics](01-quantum-mechanics/notes.md)
 - [Quantum computing basics — qubits, gates, circuits](02-quantum-computing-basics/notes.md)
-- Quantum protocols — QKD, dense coding, teleportation (TBD)
+- [Quantum protocols — QKD, dense coding, teleportation](quantum-protocols/notes.md)
 - Quantum algorithms — Deutsch, Bernstein–Vazirani, Grover, Simon, QFT / QPE / Shor (TBD)
 - Quantum error correction (TBD)
 - VQE (TBD)
@@ -56,9 +56,7 @@ quantum-computing-study/
 │   └── notes.md
 ├── 03-quantum-protocols/
 │   ├── notes.md
-│   ├── qkd/
-│   ├── dense-coding/
-│   └── teleportation/
+│   ├── implementation-protocols.ipynb
 ├── 04-quantum-algorithms/
 │   ├── notes.md
 │   ├── deutsch/
