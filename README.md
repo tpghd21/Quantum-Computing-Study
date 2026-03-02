@@ -66,9 +66,9 @@ quantum-computing-study/
 │   ├── qft/
 │   ├── qpe/
 │   └── shor/
-├── 05-quantum-error-correction/      ← planned
-├── 06-variational-algorithms/        ← planned
-└── 07-quantum-monte-carlo/           ← planned
+├── 05-quantum-error-correction/      
+├── 06-variational-algorithms/        
+└── 07-quantum-monte-carlo/           
 ```
 
 ---
