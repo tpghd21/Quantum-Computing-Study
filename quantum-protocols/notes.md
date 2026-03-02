@@ -177,8 +177,6 @@ $$\mathrm{Entangled\ resource} \to \mathrm{Clifford\ circuit} \to \mathrm{Measur
 | Teleportation | 1 Bell pair + 2 cbits | 1 unknown qubit (destroyed) | 1 qubit (recovered) | $\vert\Psi\_{\mathrm{pre}}\rangle = \frac{1}{2}\sum \vert m\_1 m\_2\rangle \otimes X^{m\_2}Z^{m\_1}\vert\psi\rangle$ |
 | Superdense coding | 1 Bell pair + 1 qubit | 2 classical bits | 2 classical bits | Paulis permute Bell basis |
 | No-cloning | — | — | — | $\langle\psi\vert\phi\rangle = \langle\psi\vert\phi\rangle^2 \implies$ contradiction |
-| CHSH | 2 parties, 2 settings each | — | — | Classical $\leq 2$, QM $= 2\sqrt{2}$ |
-
 ---
 
 [← Back to README](../README.md)
