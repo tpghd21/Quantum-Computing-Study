@@ -82,6 +82,7 @@ After $H_1$:
 - If $f(0) \oplus f(1) = 1$ (balanced): state is $\pm|1\rangle_1$ → **measure 1**
 
 **Step 4**: Measure $q_1$
+
 $$
 \text{Result} = f(0) \oplus f(1) = \begin{cases}
 0 & \text{constant} \\
