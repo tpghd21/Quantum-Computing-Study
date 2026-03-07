@@ -12,9 +12,6 @@ A structured, ground-up study of quantum computing — from linear algebra throu
 - [Quantum protocols — QKD, dense coding, teleportation](quantum-protocols/notes.md)
 - Quantum algorithms — Deutsch, Bernstein–Vazirani, Grover, Simon, QFT / QPE / Shor (TBD)
 - Quantum error correction (TBD)
-- VQE (TBD)
-- QAOA (TBD)
-- Quantum Monte Carlo (TBD)
 
 ---
 
@@ -65,10 +62,8 @@ quantum-computing-study/
 │   ├── grover/
 │   ├── qft/
 │   ├── qpe/
-│   └── shor/
-├── 05-quantum-error-correction/      
-├── 06-variational-algorithms/        
-└── 07-quantum-monte-carlo/           
+│   └── shor/  
+└── 
 ```
 
 ---
