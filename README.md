@@ -12,7 +12,7 @@ Each topic is organized as **theory → implementation → validation**, using Q
 | 00 | Linear algebra review | [notes.md](00-linear-algebra/notes.md) | — |
 | 01 | Quantum mechanics basics | [notes.md](01-quantum-mechanics/notes.md) | — |
 | 02 | Quantum computing basics — qubits, gates, circuits | [notes.md](02-quantum-computing-basics/notes.md) | TBD |
-| 03 | Quantum protocols — Bell states, dense coding, teleportation | [notes.md](03-quantum-protocols/notes.md) | [notebook](03-quantum-protocols/implementation.ipynb) |
+| 03 | Quantum protocols — Bell states, dense coding, teleportation | [notes.md](03-quantum-protocols/notes.md) | [notebook](03-quantum-protocols/implementation-protocols.ipynb) |
 | 04 | Quantum algorithms — Deutsch, BV, Simon, Grover, QFT / QPE / Shor | [notes.md](04-quantum-algorithms/notes.md) | TBD |
 | 05 | Quantum error correction | TBD | TBD |
 
